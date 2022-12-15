@@ -10,7 +10,6 @@
 
 ### Requirement
 
-- Docker
 - kubectl
 - kind
 - Go
