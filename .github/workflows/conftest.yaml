@@ -1,0 +1,19 @@
+name: conftest
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  conftest:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aquaproj/aqua-installer@v1.1.2
+        with:
+          aqua_version: v1.25.0
+      - run: |
+          conftest test --update https://github.com/YunosukeY/policies-for-pss/raw/master/bundle.tar.gz k8s/app
+          helmfile template -f k8s/charts -e dev | conftest test --update https://github.com/YunosukeY/policies-for-pss/raw/master/bundle.tar.gz -

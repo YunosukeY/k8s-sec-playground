@@ -1,0 +1,43 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: deny-all-ingress
+spec:
+  order: 10000.0
+  types:
+    - Ingress
+  ingress:
+    - action: Log
+    - action: Deny
+---
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-cluster-internal
+spec:
+  order: 9000.0
+  types:
+    - Ingress
+  ingress:
+    - action: Allow
+      source:
+        nets:
+          - 192.168.0.0/16
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  namespace: ingress
+  name: allow-ingress-nginx
+spec:
+  order: 1000.0
+  selector: app.kubernetes.io/name == 'ingress-nginx' && app.kubernetes.io/component == 'controller'
+  types:
+    - Ingress
+  ingress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 80

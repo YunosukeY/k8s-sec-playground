@@ -1,0 +1,13 @@
+repositories:
+  - name: gatekeeper
+    url: https://open-policy-agent.github.io/gatekeeper/charts
+releases:
+  - name: gatekeeper
+    namespace: gatekeeper-system
+    chart: gatekeeper/gatekeeper
+    version: 3.10.0
+    values:
+      - values.yaml
+environments:
+  dev: {}
+  ci: {}

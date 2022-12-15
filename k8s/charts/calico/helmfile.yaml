@@ -1,0 +1,12 @@
+repositories:
+  - name: projectcalico
+    url: https://projectcalico.docs.tigera.io/charts
+releases:
+  - name: calico
+    namespace: tigera-operator
+    chart: projectcalico/tigera-operator
+    version: v3.24.5
+    disableValidationOnInstall: true
+environments:
+  dev: {}
+  ci: {}
