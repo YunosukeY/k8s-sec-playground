@@ -1,8 +1,8 @@
-# K8s Playground on kind
+# K8s Security Playground on kind
 
-[![conftest](https://github.com/YunosukeY/k8s-playground-on-kind/actions/workflows/conftest.yaml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-playground-on-kind/actions/workflows/conftest.yaml)
-[![yamllint](https://github.com/YunosukeY/k8s-playground/actions/workflows/yamllint.yaml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-playground/actions/workflows/yamllint.yaml)
-[![golangci-lint](https://github.com/YunosukeY/k8s-playground-on-kind/actions/workflows/golangci-lint.yml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-playground-on-kind/actions/workflows/golangci-lint.yml)
+[![conftest](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/conftest.yaml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/conftest.yaml)
+[![yamllint](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/yamllint.yaml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/yamllint.yaml)
+[![golangci-lint](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/golangci-lint.yml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/golangci-lint.yml)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 
 ## Usage
