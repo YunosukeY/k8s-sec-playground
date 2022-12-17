@@ -2,6 +2,7 @@ package e2e
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -9,10 +10,25 @@ import (
 	"net/http/cookiejar"
 )
 
-const host = "http://localhost"
+const host = "https://localhost"
 
-var jar, _ = cookiejar.New(nil)
-var client = &http.Client{Jar: jar}
+func getClient() *http.Client {
+	jar, err := cookiejar.New(nil)
+	if err != nil {
+		panic(err)
+	}
+
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			ServerName:         "ingress.local",
+			InsecureSkipVerify: true,
+		},
+	}
+
+	return &http.Client{Jar: jar, Transport: tr}
+}
+
+var client = getClient()
 
 type getAPI[R any] struct {
 	path string
