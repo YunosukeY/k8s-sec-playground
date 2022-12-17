@@ -31,15 +31,23 @@ func getClient() *http.Client {
 var client = getClient()
 
 type getAPI[R any] struct {
-	path string
+	path   string
+	secure bool
 }
 
 func NewGetAPI[R any](path string) getAPI[R] {
-	return getAPI[R]{path}
+	return getAPI[R]{path: path, secure: true}
+}
+
+func NewUnsecureGetAPI[R any](path string) getAPI[R] {
+	return getAPI[R]{path: path, secure: false}
 }
 
 func (api getAPI[R]) getURL() string {
-	return fmt.Sprintf("https://%s%s", host, api.path)
+	if api.secure {
+		return fmt.Sprintf("https://%s%s", host, api.path)
+	}
+	return fmt.Sprintf("http://%s%s", host, api.path)
 }
 
 func (api getAPI[R]) Request() (*R, error) {
