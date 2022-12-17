@@ -29,8 +29,12 @@ deploy () {
   helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
   kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/template_Policy.yaml
+  kubectl apply -f policy/disallow-addtional-gatekeeper-config/template.yaml
+  kubectl apply -f policy/disallow-addtional-network-policy/template.yaml
   sleep 1 # hack
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_Policy.yaml
+  kubectl apply -f policy/disallow-addtional-gatekeeper-config/constraint.yaml
+  kubectl apply -f policy/disallow-addtional-network-policy/constraint.yaml
 
   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test.key -out test.crt -subj "/CN=example.com/O=example.com" -addext "subjectAltName = DNS:example.com"
   kubectl create secret tls cert-secret --key test.key --cert test.crt

@@ -5,3 +5,6 @@ main
 
 test.crt
 test.key
+
+template.yaml
+constraint.yaml
