@@ -6,6 +6,10 @@ metadata:
   namespace: app
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - example.com
+      secretName: cert-secret
   rules:
     - http:
         paths:
@@ -34,6 +38,10 @@ metadata:
     nginx.ingress.kubernetes.io/auth-response-headers: x-auth
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - example.com
+      secretName: cert-secret
   rules:
     - http:
         paths:
