@@ -39,7 +39,6 @@ EOF
 ### To Run E2E Test
 
 ```sh
-cd backend
 go test cmd/e2e/main_test.go
 ```
 

@@ -4,12 +4,14 @@ on:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
   pull_request:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
 jobs:
   golangci-lint:
     runs-on: ubuntu-22.04
@@ -19,5 +21,4 @@ jobs:
         with:
           aqua_version: v1.25.0
       - run: |
-          cd backend
           golangci-lint run --out-format=github-actions

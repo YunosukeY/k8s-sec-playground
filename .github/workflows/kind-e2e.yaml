@@ -4,14 +4,16 @@ on:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
       - "k8s/**"
       - "kind/**"
   pull_request:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
       - "k8s/**"
       - "kind/**"
 jobs:
