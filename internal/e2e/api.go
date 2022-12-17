@@ -10,7 +10,7 @@ import (
 	"net/http/cookiejar"
 )
 
-const host = "https://localhost"
+const host = "localhost"
 
 func getClient() *http.Client {
 	jar, err := cookiejar.New(nil)
@@ -38,8 +38,12 @@ func NewGetAPI[R any](path string) getAPI[R] {
 	return getAPI[R]{path}
 }
 
+func (api getAPI[R]) getURL() string {
+	return fmt.Sprintf("https://%s%s", host, api.path)
+}
+
 func (api getAPI[R]) Request() (*R, error) {
-	resp, err := client.Get(host + api.path)
+	resp, err := client.Get(api.getURL())
 	if err != nil {
 		return nil, err
 	}
@@ -68,13 +72,17 @@ func NewPostAPI[B any, R any](path string) postAPI[B, R] {
 	return postAPI[B, R]{path}
 }
 
+func (api postAPI[B, R]) getURL() string {
+	return fmt.Sprintf("https://%s%s", host, api.path)
+}
+
 func (api postAPI[B, R]) Request(b B) (*R, error) {
 	bs, err := json.Marshal(b)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := client.Post(host+api.path, "application/json", bytes.NewBuffer(bs))
+	resp, err := client.Post(api.getURL(), "application/json", bytes.NewBuffer(bs))
 	if err != nil {
 		return nil, err
 	}
