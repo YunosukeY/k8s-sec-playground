@@ -1,9 +1,9 @@
-package main
+package lib.gatekeeper_config
 
 import data.lib.wrapper
 import future.keywords
 
-violation contains msg if {
+violation_disallow_addtional_gatekeeper_config contains msg if {
 	resource := wrapper.resource(input)
 
 	startswith(resource.apiVersion, "config.gatekeeper.sh")
