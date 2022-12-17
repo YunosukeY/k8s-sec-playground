@@ -19,6 +19,10 @@ fi
 command="$1"
 repo_dir="$(git rev-parse --show-toplevel)"
 
+prepare() {
+  konstraint create .
+}
+
 create () {
   kind create cluster --config "${repo_dir}/kind/cluster.yaml"
 }
@@ -52,9 +56,11 @@ run () {
 }
 
 if [ "$command" == "create" ]; then
+  prepare
   create
   deploy dev
 elif [ "$command" == "run" ]; then
+  prepare
   create
   deploy ci
   run
