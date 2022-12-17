@@ -28,6 +28,8 @@ DOCKER_PASSWORD={DOCKERHUB_PASSWORD}
 EOF
 ```
 
+3. Update images in `k8s/app/kustomization.yaml` with your own image.
+
 ### To Create a Cluster
 
 ```sh
