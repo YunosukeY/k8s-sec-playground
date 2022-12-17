@@ -32,6 +32,8 @@ deploy () {
   sleep 1 # hack
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_Policy.yaml
 
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test.key -out test.crt -subj "/CN=example.com/O=example.com" -addext "subjectAltName = DNS:example.com"
+  kubectl create secret tls cert-secret --key test.key --cert test.crt
   helmfile apply -f "${repo_dir}/k8s/charts" -e $1
   kubectl wait --for condition=available deployment/ingress-nginx-controller --namespace=ingress --timeout=300s
 

@@ -11,10 +11,17 @@ var login = e2e.NewPostAPI[e2e.User, interface{}]("/api/v1/sessions")
 var getTodos = e2e.NewGetAPI[[]e2e.TodoForResponse]("/api/v1/todos")
 var postTodo = e2e.NewPostAPI[e2e.TodoForPostRequest, e2e.TodoForResponse]("/api/v1/todos")
 var publicGetTodos = e2e.NewGetAPI[[]e2e.TodoForResponse]("/api/v1/public/todos")
+var unsecure = e2e.NewUnsecureGetAPI[[]e2e.TodoForResponse]("/api/v1/public/todos")
 
 func Test(t *testing.T) {
+	testUnsecure(t)
 	testWithoutAuth(t)
 	testWithAuth(t)
+}
+
+func testUnsecure(t *testing.T) {
+	todos, err := unsecure.Request()
+	assert.NotNil(t, err, todos)
 }
 
 func testWithoutAuth(t *testing.T) {

@@ -40,4 +40,4 @@ spec:
       protocol: TCP
       destination:
         ports:
-          - 80
+          - 443
