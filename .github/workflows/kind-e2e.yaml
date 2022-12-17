@@ -4,14 +4,16 @@ on:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
       - "k8s/**"
       - "kind/**"
   pull_request:
     branches:
       - master
     paths:
-      - "backend/**"
+      - "cmd/**"
+      - "internal/**"
       - "k8s/**"
       - "kind/**"
 jobs:
@@ -27,10 +29,11 @@ jobs:
           go-version: '1.19.x'
       - run: helm plugin install https://github.com/databus23/helm-diff
       - env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
           cat <<EOF > .env.dockerhub
-          DOCKER_USERNAME=kimitsu
+          DOCKER_USERNAME=$DOCKERHUB_USERNAME
           DOCKER_PASSWORD=$DOCKERHUB_PASSWORD
           EOF
           ./kind/e2e.sh run

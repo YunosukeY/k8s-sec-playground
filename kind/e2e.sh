@@ -29,6 +29,7 @@ deploy () {
   helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
   kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/template_Policy.yaml
+  sleep 1 # hack
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_Policy.yaml
 
   helmfile apply -f "${repo_dir}/k8s/charts" -e $1
@@ -41,7 +42,6 @@ deploy () {
 
 run () {
   kubectl wait --for condition=available deployment/app-deployment deployment/auth-deployment --namespace=app --timeout=600s
-  cd "${repo_dir}/backend"
   go test cmd/e2e/main_test.go
 }
 

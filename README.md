@@ -17,6 +17,10 @@
 
 ### Preparation
 
+1. Push an image to DockerHub<br>
+   See https://github.com/YunosukeY/k8s-playground-backend#preparation-for-kind-sample
+2. Create .env.dockerhub file
+
 ```sh
 cat <<EOF > .env.dockerhub
 DOCKER_USERNAME={DOCKERHUB_USERNAME}
@@ -24,7 +28,7 @@ DOCKER_PASSWORD={DOCKERHUB_PASSWORD}
 EOF
 ```
 
-Also you need to push a image (/backend/Dockerfile) to a specific DockerHub private repository.
+3. Update images in `k8s/app/kustomization.yaml` with your own image.
 
 ### To Create a Cluster
 
@@ -35,7 +39,6 @@ Also you need to push a image (/backend/Dockerfile) to a specific DockerHub priv
 ### To Run E2E Test
 
 ```sh
-cd backend
 go test cmd/e2e/main_test.go
 ```
 
@@ -45,20 +48,8 @@ go test cmd/e2e/main_test.go
 ./e2d.sh delete
 ```
 
-### Dev Requirement
-
-- yamllint
-- conftest
-- golangci-lint
-
 ## Features
-
-### Security
 
 - Private Registry
 - Gatekeeper
 - Calico
-
-### Managing Manifests
-
-- Helmfile
