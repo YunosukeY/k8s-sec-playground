@@ -3,7 +3,11 @@
 
 main
 
-/policy/
-
 test.crt
 test.key
+
+pss
+template.yaml
+constraint.yaml
+
+/bin/

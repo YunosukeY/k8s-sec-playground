@@ -19,6 +19,10 @@ fi
 command="$1"
 repo_dir="$(git rev-parse --show-toplevel)"
 
+prepare() {
+  ./script/konstraint.sh create .
+}
+
 create () {
   kind create cluster --config "${repo_dir}/kind/cluster.yaml"
 }
@@ -28,9 +32,9 @@ deploy () {
 
   helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
   kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
-  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/template_Policy.yaml
+  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/template_PodSecurityStandards.yaml -f "${repo_dir}/policy/template.yaml"
   sleep 1 # hack
-  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_Policy.yaml
+  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_PodSecurityStandards.yaml -f "${repo_dir}/policy/constraint.yaml"
 
   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test.key -out test.crt -subj "/CN=example.com/O=example.com" -addext "subjectAltName = DNS:example.com"
   kubectl create secret tls cert-secret --key test.key --cert test.crt
@@ -48,9 +52,11 @@ run () {
 }
 
 if [ "$command" == "create" ]; then
+  prepare
   create
   deploy dev
 elif [ "$command" == "run" ]; then
+  prepare
   create
   deploy ci
   run
