@@ -3,7 +3,7 @@
 set -eu
 
 os="$(uname -s)"
-machine="$(uname -m)"
+machine=$([[ $(uname -m) == arm64 ]] && echo arm64 || echo amd64)
 version="v0.24.0"
 repo_dir="$(git rev-parse --show-toplevel)"
 bin="${repo_dir}/bin"
