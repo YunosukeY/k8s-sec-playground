@@ -20,7 +20,7 @@ command="$1"
 repo_dir="$(git rev-parse --show-toplevel)"
 
 prepare() {
-  konstraint create .
+  ./script/konstraint.sh create .
 }
 
 create () {
