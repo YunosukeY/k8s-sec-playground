@@ -25,6 +25,32 @@ prepare() {
 
 create () {
   kind create cluster --config "${repo_dir}/kind/cluster.yaml"
+
+  # create csr
+  openssl genrsa -out myuser.key 2048
+  openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
+  cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: myuser
+spec:
+  request: $(cat myuser.csr | base64 | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 3600 # TODO
+  usages:
+  - client auth
+EOF
+
+  # approve
+  kubectl certificate approve myuser
+
+  # use user
+  kubectl apply -f "${repo_dir}/k8s/app/cluster-role.yaml"
+  kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+  kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt --embed-certs=true
+  kubectl config set-context myuser --cluster=kind-kind --user=myuser
+  kubectl config use-context myuser
 }
 
 deploy () {
