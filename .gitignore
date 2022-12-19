@@ -3,8 +3,9 @@
 
 main
 
-test.crt
-test.key
+*.crt
+*.key
+*.csr
 
 pss
 template.yaml
