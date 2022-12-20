@@ -3,9 +3,9 @@
 
 main
 
-*.crt
 *.key
 *.csr
+*.crt
 
 pss
 template.yaml

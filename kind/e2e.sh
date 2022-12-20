@@ -25,32 +25,6 @@ prepare() {
 
 create () {
   kind create cluster --config "${repo_dir}/kind/cluster.yaml"
-
-  # create csr
-  openssl genrsa -out myuser.key 2048
-  openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
-  cat <<EOF | kubectl apply -f -
-apiVersion: certificates.k8s.io/v1
-kind: CertificateSigningRequest
-metadata:
-  name: myuser
-spec:
-  request: $(cat myuser.csr | base64 | tr -d "\n")
-  signerName: kubernetes.io/kube-apiserver-client
-  expirationSeconds: 3600 # TODO
-  usages:
-  - client auth
-EOF
-
-  # approve
-  kubectl certificate approve myuser
-
-  # use user
-  kubectl apply -f "${repo_dir}/k8s/app/cluster-role.yaml"
-  kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
-  kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt --embed-certs=true
-  kubectl config set-context myuser --cluster=kind-kind --user=myuser
-  kubectl config use-context myuser
 }
 
 deploy () {
@@ -72,6 +46,39 @@ deploy () {
   source "${repo_dir}/.env.dockerhub" && kubectl create secret docker-registry registry-key --namespace=app --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD
 }
 
+create_user() {
+  # create csr
+  openssl genrsa -out myuser.key 2048
+  openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
+  cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: myuser
+spec:
+  request: $(cat myuser.csr | base64 | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 86400
+  usages:
+    - client auth
+EOF
+
+  # approve
+  kubectl certificate approve myuser
+
+  # use user
+  kubectl apply -f "${repo_dir}/k8s/app/cluster-role.yaml"
+  while [ -z $(kubectl get csr myuser -o jsonpath='{.status.certificate}') ]
+  do
+    echo "waiting crt..."
+    sleep 1
+  done
+  kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+  kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt --embed-certs=true
+  kubectl config set-context myuser --cluster=kind-kind --user=myuser
+  kubectl config use-context myuser
+}
+
 run () {
   kubectl wait --for condition=available deployment/app-deployment deployment/auth-deployment --namespace=app --timeout=600s
   go test cmd/e2e/main_test.go
@@ -81,6 +88,7 @@ if [ "$command" == "create" ]; then
   prepare
   create
   deploy dev
+  create_user
 elif [ "$command" == "run" ]; then
   prepare
   create
