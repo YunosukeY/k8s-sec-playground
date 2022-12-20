@@ -6,6 +6,14 @@
 [![kind e2e](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/kind-e2e.yaml/badge.svg?branch=master&event=push)](https://github.com/YunosukeY/k8s-sec-playground/actions/workflows/kind-e2e.yaml)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 
+## Features
+
+- Private Registry
+- Gatekeeper and Conftest
+- Calico
+- TLS Ingress
+- Authn (X509 Client Certs) and RBAC Authz
+
 ## Usage
 
 ### Requirement
@@ -47,9 +55,3 @@ go test cmd/e2e/main_test.go
 ```sh
 ./e2d.sh delete
 ```
-
-## Features
-
-- Private Registry
-- Gatekeeper
-- Calico
