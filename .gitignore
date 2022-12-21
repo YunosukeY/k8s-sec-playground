@@ -13,5 +13,4 @@ constraint.yaml
 
 /bin/
 
-access-key
-secret-access-key
+access-key.env

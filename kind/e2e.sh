@@ -43,7 +43,6 @@ deploy () {
 
   # deploy app
   kubectl apply -k "${repo_dir}/k8s/app"
-  source "${repo_dir}/.env.dockerhub" && kubectl create secret docker-registry registry-key --namespace=app --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD
 }
 
 create_user() {
