@@ -1,6 +1,3 @@
-.env
-.env.dockerhub
-
 main
 
 *.key
@@ -12,3 +9,5 @@ template.yaml
 constraint.yaml
 
 /bin/
+
+access-key.env

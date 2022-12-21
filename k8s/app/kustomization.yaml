@@ -1,4 +1,15 @@
 ---
+secretGenerator:
+  - name: awssm-secret
+    namespace: app
+    envs:
+      - access-key.env
+  - name: awssm-secret
+    namespace: ingress
+    envs:
+      - access-key.env
+generatorOptions:
+  disableNameSuffixHash: true
 images:
   - name: backend
     newName: kimitsu/kind-backend
@@ -8,3 +19,4 @@ resources:
   - network-policy.yaml
   - backend.yaml
   - ingress.yaml
+  - external-secret.yaml
