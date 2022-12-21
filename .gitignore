@@ -12,3 +12,6 @@ template.yaml
 constraint.yaml
 
 /bin/
+
+access-key
+secret-access-key
