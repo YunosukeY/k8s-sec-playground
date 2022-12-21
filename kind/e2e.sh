@@ -32,8 +32,7 @@ create () {
 }
 
 deploy () {
-  # deploy calico
-  # if calico isn't deployed, other pods don't run.
+  # deploy calico first because some pods will not run unless calico is deployed
   helmfile apply -f "${repo_dir}/k8s/charts/calico/helmfile.yaml" -e $1
 
   # deploy gatekeeper as soon as possible to comply with the policy
