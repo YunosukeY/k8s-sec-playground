@@ -14,6 +14,7 @@
 - TLS Ingress
 - Authn (X509 Client Certs) and RBAC Authz
 
+<!--
 ## Usage
 
 ### Requirement
@@ -54,4 +55,4 @@ go test cmd/e2e/main_test.go
 
 ```sh
 ./e2d.sh delete
-```
+``` -->

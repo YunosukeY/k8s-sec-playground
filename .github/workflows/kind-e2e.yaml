@@ -29,11 +29,11 @@ jobs:
           go-version: '1.19.x'
       - run: helm plugin install https://github.com/databus23/helm-diff
       - env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          cat <<EOF > .env.dockerhub
-          DOCKER_USERNAME=$DOCKERHUB_USERNAME
-          DOCKER_PASSWORD=$DOCKERHUB_PASSWORD
+          cat <<EOF > k8s/app/access-key.env
+          access-key=$AWS_ACCESS_KEY
+          secret-access-key=$AWS_SECRET_ACCESS_KEY
           EOF
           ./kind/e2e.sh run
