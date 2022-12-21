@@ -13,6 +13,7 @@
 - Calico
 - TLS Ingress
 - Authn (X509 Client Certs) and RBAC Authz
+- External Secrets Operator
 
 <!--
 ## Usage
