@@ -1,0 +1,6 @@
+# TODO
+podLabels:
+  allowPrivilegedLevelCapabilities: "true"
+  allowRunAsRoot: "true"
+  allowBaselineLevelSeccompTypes: "true"
+  allowBaselineLevelCapabilities: "true"

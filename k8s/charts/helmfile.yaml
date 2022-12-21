@@ -1,5 +1,6 @@
 helmfiles:
   - ingress-nginx/helmfile.yaml
   - external-secrets/helmfile.yaml
+  - linkerd/helmfile.yaml
 environments:
   {{ .Environment.Name }}: {}
