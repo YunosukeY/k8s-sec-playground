@@ -11,7 +11,7 @@
 - Private Registry
 - Gatekeeper and Conftest
 - Calico
-- TLS Ingress
+- TLS Ingress and mTLS
 - Authn (X509 Client Certs) and RBAC Authz
 - External Secrets Operator
 

@@ -21,6 +21,10 @@ repo_dir="$(git rev-parse --show-toplevel)"
 
 prepare() {
   ./script/konstraint.sh create .
+
+  # create key and crt for linkerd
+  step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure -f
+  step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key -f
 }
 
 create () {
@@ -28,13 +32,19 @@ create () {
 }
 
 deploy () {
+  # deploy calico first because some pods will not run unless calico is deployed
   helmfile apply -f "${repo_dir}/k8s/charts/calico/helmfile.yaml" -e $1
 
+  # deploy gatekeeper as soon as possible to comply with the policy
   helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
   kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/template_PodSecurityStandards.yaml -f "${repo_dir}/policy/template.yaml"
-  sleep 1 # hack
+  sleep 3 # hack
   kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policies-for-pss/master/k8s/constraint_PodSecurityStandards.yaml -f "${repo_dir}/policy/constraint.yaml"
+
+  # deploy linkerd before nginx to add nginx to mesh
+  helmfile apply -f "${repo_dir}/k8s/charts/linkerd/helmfile.yaml" -e $1
+  kubectl wait --for condition=available deployment/linkerd-destination deployment/linkerd-identity deployment/linkerd-proxy-injector --namespace=linkerd --timeout=300s
 
   helmfile apply -f "${repo_dir}/k8s/charts" -e $1
   kubectl wait --for condition=available deployment/ingress-nginx-controller --namespace=ingress --timeout=300s

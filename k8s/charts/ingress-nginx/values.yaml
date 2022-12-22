@@ -1,4 +1,6 @@
 controller:
+  podAnnotations:
+    linkerd.io/inject: enabled
   hostPort:
     enabled: true
   service:
@@ -8,6 +10,9 @@ controller:
     allowPrivilegeEscalation: "true"
     allowBaselineLevelSeccompTypes: "true"
     allowRunAsRoot: "true"
+    # for linkerd sidecar
+    allowPrivilegedLevelCapabilities: "true"
+    allowBaselineLevelCapabilities: "true"
   admissionWebhooks:
     patch:
       securityContext:
