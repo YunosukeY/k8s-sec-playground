@@ -5,3 +5,4 @@ metadata:
   name: app
   annotations:
     linkerd.io/inject: enabled
+    config.linkerd.io/default-inbound-policy: deny
