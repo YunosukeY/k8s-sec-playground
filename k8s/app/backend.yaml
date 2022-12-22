@@ -36,6 +36,7 @@ spec:
       labels:
         app: app
         tier: backend
+        # for linkerd sidecar
         allowPrivilegedLevelCapabilities: "true"
         allowRunAsRoot: "true"
         allowBaselineLevelSeccompTypes: "true"
@@ -126,6 +127,7 @@ spec:
       labels:
         app: auth
         tier: backend
+        # for linkerd sidecar
         allowPrivilegedLevelCapabilities: "true"
         allowRunAsRoot: "true"
         allowBaselineLevelSeccompTypes: "true"

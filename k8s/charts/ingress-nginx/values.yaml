@@ -6,11 +6,12 @@ controller:
   service:
     type: NodePort
   labels:
-    allowPrivilegedLevelCapabilities: "true"
     allowHostPort: "true"
     allowPrivilegeEscalation: "true"
     allowBaselineLevelSeccompTypes: "true"
     allowRunAsRoot: "true"
+    # for linkerd sidecar
+    allowPrivilegedLevelCapabilities: "true"
     allowBaselineLevelCapabilities: "true"
   admissionWebhooks:
     patch:
