@@ -6,10 +6,12 @@ controller:
   service:
     type: NodePort
   labels:
+    allowPrivilegedLevelCapabilities: "true"
     allowHostPort: "true"
     allowPrivilegeEscalation: "true"
     allowBaselineLevelSeccompTypes: "true"
     allowRunAsRoot: "true"
+    allowBaselineLevelCapabilities: "true"
   admissionWebhooks:
     patch:
       securityContext:
