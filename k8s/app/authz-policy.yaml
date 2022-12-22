@@ -23,8 +23,8 @@ spec:
       name: backend-services
   rules:
     - matches:
-      - path:
-          value: /api
+        - path:
+            value: /api
 ---
 apiVersion: policy.linkerd.io/v1alpha1
 kind: MeshTLSAuthentication
