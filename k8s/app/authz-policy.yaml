@@ -1,0 +1,38 @@
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: app
+  name: backend-services
+spec:
+  podSelector:
+    matchExpressions:
+      - {key: app, operator: In, values: [app, auth]}
+  port: 8080
+  proxyProtocol: "HTTP/2"
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  namespace: ingress
+  name: ingress
+spec:
+  identityRefs:
+    - kind: ServiceAccount
+      name: ingress-nginx
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  namespace: app
+  name: ingress-policy
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: backend-services
+  requiredAuthenticationRefs:
+    - group: policy.linkerd.io
+      kind: MeshTLSAuthentication
+      namespace: ingress
+      name: ingress
