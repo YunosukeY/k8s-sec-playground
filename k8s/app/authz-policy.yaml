@@ -11,6 +11,21 @@ spec:
   port: 8080
   proxyProtocol: "HTTP/2"
 ---
+apiVersion: policy.linkerd.io/v1beta1
+kind: HTTPRoute
+metadata:
+  namespace: app
+  name: backend-api-routes
+spec:
+  parentRefs:
+    - group: policy.linkerd.io
+      kind: Server
+      name: backend-services
+  rules:
+    - matches:
+      - path:
+          value: /api
+---
 apiVersion: policy.linkerd.io/v1alpha1
 kind: MeshTLSAuthentication
 metadata:
@@ -29,8 +44,8 @@ metadata:
 spec:
   targetRef:
     group: policy.linkerd.io
-    kind: Server
-    name: backend-services
+    kind: HTTPRoute
+    name: backend-api-routes
   requiredAuthenticationRefs:
     - group: policy.linkerd.io
       kind: MeshTLSAuthentication
