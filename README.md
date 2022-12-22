@@ -14,6 +14,7 @@
 - TLS Ingress and mTLS
 - Authn (X509 Client Certs) and RBAC Authz
 - External Secrets Operator
+- Traffic Control
 
 <!--
 ## Usage
