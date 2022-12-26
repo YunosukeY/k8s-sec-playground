@@ -8,13 +8,36 @@
 
 ## Features
 
-- Private Registry
-- Gatekeeper and Conftest
-- Calico
-- TLS Ingress and mTLS
-- Authn (X509 Client Certs) and RBAC Authz
-- External Secrets Operator
-- Traffic Control
+### Private Registry
+
+Application images are managed by DockerHub's private repository.
+
+### Pod Security
+
+Pod Security is verified by [Conftest](https://www.conftest.dev) in CI, and by [Gatekeeper](https://open-policy-agent.github.io/gatekeeper) in the cluster.<br>
+See [this repository](https://github.com/YunosukeY/policy-for-pss) for policy details.
+
+### Network Policy
+
+Global network policy is managed by [Calico](https://www.tigera.io/project-calico).
+
+### TLS
+
+TLS termination is managed by [Ingress NGINX](https://kubernetes.github.io/ingress-nginx).<br>
+mTLS is managed by [Linkerd](https://linkerd.io).
+
+### Authn and Authz
+
+Authentication is enabled with X509 Client Certs.<br>
+RBAC authorization is also enabled.
+
+### Secret Management
+
+Secrets are managed by [AWS Secret Manager](https://aws.amazon.com/secrets-manager), and injected by [External Secrets Operator](https://external-secrets.io).
+
+### Traffic Control
+
+Traffic control is managed by [Linkerd](https://linkerd.io).
 
 <!--
 ## Usage
