@@ -15,6 +15,6 @@ jobs:
         with:
           aqua_version: v1.25.2
       - run: |
-          conftest pull https://github.com/YunosukeY/policies-for-pss/raw/master/bundle.tar.gz -p pss
+          conftest pull https://github.com/YunosukeY/policy-for-pss/raw/master/bundle.tar.gz -p pss
           conftest test k8s/app -p pss
           helmfile template -f k8s/charts -e dev | conftest test -p pss -
