@@ -4,13 +4,15 @@
 
   ignorePresets: [":prHourlyLimit2"],
   branchConcurrentLimit: 0,
+  prHourlyLimit: 0,
+  automerge: true,
+  platformAutomerge: true,
 
   kubernetes: {
     fileMatch: ["^k8s/app/.+\\.yaml$"],
   },
 
   labels: ["dependencies"],
-  automerge: false,
   
   reviewers: ["YunosukeY"],
 }
