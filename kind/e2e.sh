@@ -24,7 +24,6 @@ prepare() {
 
   # create key and crt for linkerd
   step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure -f
-  step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key -f
 }
 
 create () {
@@ -43,6 +42,9 @@ deploy () {
   # kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policy-for-pss/master/k8s/constraint_PodSecurityStandards.yaml -f "${repo_dir}/policy/constraint.yaml"
 
   helmfile apply -f "${repo_dir}/k8s/charts/cert-manager/helmfile.yaml" -e $1
+  kubectl create secret tls ca-crt --cert=ca.crt --key=ca.key --namespace=cert-manager
+  kubectl create namespace linkerd
+  kubectl apply -f k8s/app/crt.yaml
 
   # deploy linkerd before nginx to add nginx to mesh
   helmfile apply -f "${repo_dir}/k8s/charts/linkerd/helmfile.yaml" -e $1
