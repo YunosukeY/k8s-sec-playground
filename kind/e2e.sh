@@ -44,6 +44,7 @@ deploy () {
 
   helmfile apply -f "${repo_dir}/k8s/charts/istio-base/helmfile.yaml" -e $1
   helmfile apply -f "${repo_dir}/k8s/charts/istiod/helmfile.yaml" -e $1
+  kubectl wait --for condition=available deployment/istiod --namespace=istio-system --timeout=300s
 
   helmfile apply -f "${repo_dir}/k8s/charts" -e $1
   kubectl wait --for condition=available deployment/ingress-nginx-controller --namespace=ingress --timeout=300s
@@ -87,7 +88,7 @@ EOF
 }
 
 run () {
-  kubectl wait --for condition=available deployment/app-deployment deployment/auth-deployment --namespace=app --timeout=600s
+  kubectl wait --for condition=available deployment/app-deployment deployment/auth-deployment --namespace=app --timeout=300s
   go test cmd/e2e/main_test.go
 }
 
