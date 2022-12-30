@@ -39,6 +39,10 @@ Secrets are managed by [AWS Secret Manager](https://aws.amazon.com/secrets-manag
 
 Traffic control is managed by [Linkerd](https://linkerd.io).
 
+### Certificate Management
+
+Certificates are managed by [cert-manager](https://cert-manager.io).
+
 <!--
 ## Usage
 
