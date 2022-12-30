@@ -15,10 +15,6 @@ releases:
     set:
       - name: identityTrustAnchorsPEM
         file: ../../../ca.crt
-      - name: identity.issuer.tls.crtPEM
-        file: ../../../issuer.crt
-      - name: identity.issuer.tls.keyPEM
-        file: ../../../issuer.key
 environments:
   dev: {}
   ci: {}

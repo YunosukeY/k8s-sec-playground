@@ -1,0 +1,46 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cluster-issuer
+spec:
+  ca:
+    secretName: ca-crt
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  namespace: linkerd
+  name: linkerd-identity-issuer
+spec:
+  secretName: linkerd-identity-issuer
+  duration: 48h
+  renewBefore: 25h
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer
+  commonName: identity.linkerd.cluster.local
+  dnsNames:
+    - identity.linkerd.cluster.local
+  isCA: true
+  privateKey:
+    algorithm: ECDSA
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  namespace: app
+  name: cert-secret
+spec:
+  secretName: cert-secret
+  duration: 48h
+  renewBefore: 25h
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer
+  commonName: example.com
+  dnsNames:
+    - example.com
+  isCA: true
+  privateKey:
+    algorithm: ECDSA

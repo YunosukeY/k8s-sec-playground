@@ -11,3 +11,5 @@ constraint.yaml
 /bin/
 
 access-key.env
+
+dockerconfig.json

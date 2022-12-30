@@ -1,0 +1,22 @@
+installCRDs: true
+prometheus:
+  enabled: false
+containerSecurityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+webhook:
+  containerSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+cainjector:
+  containerSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+startupapicheck:
+  containerSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault

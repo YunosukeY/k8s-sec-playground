@@ -4,10 +4,6 @@ secretGenerator:
     namespace: app
     envs:
       - access-key.env
-  - name: awssm-secret
-    namespace: ingress
-    envs:
-      - access-key.env
 generatorOptions:
   disableNameSuffixHash: true
 images:
