@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: public
   namespace: app
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   tls:

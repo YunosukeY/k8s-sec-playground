@@ -16,3 +16,4 @@ resources:
   - backend.yaml
   - ingress.yaml
   - external-secret.yaml
+  - auth.yaml
