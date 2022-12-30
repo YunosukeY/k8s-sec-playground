@@ -10,6 +10,10 @@ controller:
     allowPrivilegeEscalation: "true"
     allowBaselineLevelSeccompTypes: "true"
     allowRunAsRoot: "true"
+    # for istio sidecar
+    allowPrivilegedLevelCapabilities: "true"
+    allowBaselineLevelCapabilities: "true"
+    allowRunAsRootUser: "true"
   admissionWebhooks:
     patch:
       securityContext:

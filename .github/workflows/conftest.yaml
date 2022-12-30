@@ -19,3 +19,5 @@ jobs:
           conftest test k8s/app -p pss
           helmfile template -f k8s/charts -e dev | conftest test -p pss -
           helmfile template -f k8s/charts/cert-manager/helmfile.yaml -e dev | conftest test -p pss -
+          helmfile template -f k8s/charts/istio-base/helmfile.yaml -e dev | conftest test -p pss -
+          helmfile template -f k8s/charts/istiod/helmfile.yaml -e dev | conftest test -p pss -

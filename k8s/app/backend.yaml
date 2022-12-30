@@ -36,6 +36,12 @@ spec:
       labels:
         app: app
         tier: backend
+        # for istio sidecar
+        allowPrivilegedLevelCapabilities: "true"
+        allowRunAsRoot: "true"
+        allowRunAsRootUser: "true"
+        allowBaselineLevelSeccompTypes: "true"
+        allowBaselineLevelCapabilities: "true"
     spec:
       containers:
         - image: backend@sha256:unknown
@@ -122,6 +128,12 @@ spec:
       labels:
         app: auth
         tier: backend
+        # for istio sidecar
+        allowPrivilegedLevelCapabilities: "true"
+        allowRunAsRoot: "true"
+        allowRunAsRootUser: "true"
+        allowBaselineLevelSeccompTypes: "true"
+        allowBaselineLevelCapabilities: "true"
     spec:
       containers:
         - image: backend@sha256:unknown

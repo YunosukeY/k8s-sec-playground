@@ -1,0 +1,4 @@
+pilot:
+  podLabels:
+    allowRunAsRoot: "true"
+    allowBaselineLevelSeccompTypes: "true"

@@ -7,6 +7,8 @@ releases:
     chart: istio/istiod
     version: 1.16.1
     # disableValidationOnInstall: true
+    values:
+      - values.yaml
 environments:
   dev: {}
   ci: {}
