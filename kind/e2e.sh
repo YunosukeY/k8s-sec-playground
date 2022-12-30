@@ -32,11 +32,11 @@ deploy () {
   helmfile apply -f "${repo_dir}/k8s/charts/calico/helmfile.yaml" -e $1
 
   # deploy gatekeeper as soon as possible to comply with the policy
-  helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
-  kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
-  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policy-for-pss/master/k8s/template_PodSecurityStandards.yaml -f "${repo_dir}/policy/template.yaml"
-  sleep 3 # hack
-  kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policy-for-pss/master/k8s/constraint_PodSecurityStandards.yaml -f "${repo_dir}/policy/constraint.yaml"
+  # helmfile apply -f "${repo_dir}/k8s/charts/gatekeeper/helmfile.yaml" -e $1
+  # kubectl apply -f "${repo_dir}/k8s/app/gatekeeper-config.yaml"
+  # kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policy-for-pss/master/k8s/template_PodSecurityStandards.yaml -f "${repo_dir}/policy/template.yaml"
+  # sleep 3 # hack
+  # kubectl apply -f https://raw.githubusercontent.com/YunosukeY/policy-for-pss/master/k8s/constraint_PodSecurityStandards.yaml -f "${repo_dir}/policy/constraint.yaml"
 
   helmfile apply -f "${repo_dir}/k8s/charts/cert-manager/helmfile.yaml" -e $1
   kubectl create secret tls ca-crt --cert=ca.crt --key=ca.key --namespace=cert-manager
