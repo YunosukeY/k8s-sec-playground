@@ -14,3 +14,22 @@ metadata:
  namespace: app
  name: allow-nothing
 spec: {}
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  namespace: app
+  name: allow-nginx-to-backend
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      tier: backend
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/ingress/sa/ingress-nginx"]
+      to:
+        - operation:
+            ports: ["8080"]
+            paths: ["/api/*"]
