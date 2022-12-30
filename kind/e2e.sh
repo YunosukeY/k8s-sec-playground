@@ -21,9 +21,6 @@ repo_dir="$(git rev-parse --show-toplevel)"
 
 prepare() {
   ./script/konstraint.sh create .
-
-  # create key and crt for linkerd
-  step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure -f
 }
 
 create () {
@@ -43,13 +40,8 @@ deploy () {
 
   helmfile apply -f "${repo_dir}/k8s/charts/cert-manager/helmfile.yaml" -e $1
   kubectl create secret tls ca-crt --cert=ca.crt --key=ca.key --namespace=cert-manager
-  kubectl create namespace linkerd
   kubectl create namespace app
   kubectl apply -f k8s/app/crt.yaml
-
-  # deploy linkerd before nginx to add nginx to mesh
-  helmfile apply -f "${repo_dir}/k8s/charts/linkerd/helmfile.yaml" -e $1
-  kubectl wait --for condition=available deployment/linkerd-destination deployment/linkerd-identity deployment/linkerd-proxy-injector --namespace=linkerd --timeout=300s
 
   helmfile apply -f "${repo_dir}/k8s/charts" -e $1
   kubectl wait --for condition=available deployment/ingress-nginx-controller --namespace=ingress --timeout=300s

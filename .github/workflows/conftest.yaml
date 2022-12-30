@@ -18,5 +18,4 @@ jobs:
           conftest pull https://github.com/YunosukeY/policy-for-pss/raw/master/bundle.tar.gz -p pss
           conftest test k8s/app -p pss
           helmfile template -f k8s/charts -e dev | conftest test -p pss -
-          helmfile template -f k8s/charts/linkerd/helmfile.yaml -e dev | conftest test -p pss -
           helmfile template -f k8s/charts/cert-manager/helmfile.yaml -e dev | conftest test -p pss -
