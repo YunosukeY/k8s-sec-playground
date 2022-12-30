@@ -11,8 +11,8 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
- namespace: app
- name: allow-nothing
+  namespace: app
+  name: allow-nothing
 spec: {}
 ---
 apiVersion: security.istio.io/v1beta1
