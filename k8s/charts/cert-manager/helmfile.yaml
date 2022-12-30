@@ -1,0 +1,13 @@
+repositories:
+  - name: cert-manager
+    url: https://charts.jetstack.io
+releases:
+  - name: cert-manager
+    namespace: cert-manager
+    chart: cert-manager/cert-manager
+    version: 1.10.1
+    values:
+      - values.yaml
+environments:
+  dev: {}
+  ci: {}
