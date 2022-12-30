@@ -1,4 +1,6 @@
 controller:
+  podLabels:
+    sidecar.istio.io/inject: "true"
   hostPort:
     enabled: true
   service:
