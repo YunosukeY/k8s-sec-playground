@@ -1,0 +1,12 @@
+repositories:
+  - name: istio
+    url: https://istio-release.storage.googleapis.com/charts
+releases:
+  - name: istiod
+    namespace: istio-system
+    chart: istio/istiod
+    version: 1.16.1
+    # disableValidationOnInstall: true
+environments:
+  dev: {}
+  ci: {}
