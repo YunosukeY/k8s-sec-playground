@@ -40,3 +40,5 @@ nodes:
       - hostPath: kind/audit-policy.yaml
         containerPath: /etc/kubernetes/policies/audit-policy.yaml
         readOnly: true
+      # - containerPath: /var/lib/kubelet/config.json
+      #   hostPath: dockerconfig.json
