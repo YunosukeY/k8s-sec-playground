@@ -44,6 +44,7 @@ deploy () {
   helmfile apply -f "${repo_dir}/k8s/charts/cert-manager/helmfile.yaml" -e $1
   kubectl create secret tls ca-crt --cert=ca.crt --key=ca.key --namespace=cert-manager
   kubectl create namespace linkerd
+  kubectl create namespace app
   kubectl apply -f k8s/app/crt.yaml
 
   # deploy linkerd before nginx to add nginx to mesh
