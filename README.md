@@ -38,12 +38,11 @@ Global network policy is managed by [Calico](https://www.tigera.io/project-calic
 #### TLS
 
 TLS termination is managed by [Ingress NGINX](https://kubernetes.github.io/ingress-nginx).<br>
-
-<!-- mTLS is managed by [Linkerd](https://linkerd.io).
+mTLS is managed by [Istio](https://istio.io/).
 
 #### Traffic Control
 
-Traffic control is managed by [Linkerd](https://linkerd.io). -->
+Traffic control is managed by [Istio](https://istio.io/).
 
 ### About Auth
 
