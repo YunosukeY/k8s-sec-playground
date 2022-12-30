@@ -4,8 +4,7 @@ kind: ClusterIssuer
 metadata:
   name: cluster-issuer
 spec:
-  ca:
-    secretName: ca-crt
+  selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
