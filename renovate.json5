@@ -9,10 +9,10 @@
   platformAutomerge: true,
 
   kubernetes: {
-    fileMatch: ["^k8s/app/.+\\.yaml$"],
+    fileMatch: ["^k8s/app/.+\\.yaml$", "^kind/.+\\.yaml$"],
   },
 
   labels: ["dependencies"],
-  
+
   reviewers: ["YunosukeY"],
 }
