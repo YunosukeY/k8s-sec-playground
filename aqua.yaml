@@ -15,4 +15,4 @@ packages:
 - name: helmfile/helmfile@v0.151.0
 - name: kubernetes-sigs/kind@v0.17.0
 - name: open-policy-agent/conftest@v0.39.2
-- name: smallstep/cli@v0.23.2
+- name: smallstep/cli@v0.23.3
