@@ -5,7 +5,7 @@ releases:
   - name: cert-manager
     namespace: cert-manager
     chart: cert-manager/cert-manager
-    version: v1.11.1
+    version: v1.11.2
     values:
       - values.yaml
 environments:
