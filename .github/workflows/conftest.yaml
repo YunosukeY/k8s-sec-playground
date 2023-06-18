@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: aquaproj/aqua-installer@v2.1.1
         with:
-          aqua_version: v2.8.0
+          aqua_version: v2.9.0
       - run: |
           conftest pull https://github.com/YunosukeY/policy-for-pss/raw/master/bundle.tar.gz -p pss
           conftest test k8s/app -p pss
