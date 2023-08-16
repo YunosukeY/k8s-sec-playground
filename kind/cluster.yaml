@@ -6,7 +6,7 @@ networking: # for calico
   podSubnet: 192.168.0.0/16
 nodes:
   - role: control-plane
-    image: kindest/node:v1.27.3
+    image: kindest/node:v1.28.0
     extraPortMappings:
       - containerPort: 443
         hostPort: 443
