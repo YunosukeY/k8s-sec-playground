@@ -9,7 +9,7 @@ releases:
   - name: linkerd-control-plane
     namespace: linkerd
     chart: linkerd/linkerd-control-plane
-    version: 1.16.2
+    version: 1.16.3
     values:
       - values.yaml
     set:
