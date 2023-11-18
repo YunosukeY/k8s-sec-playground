@@ -5,11 +5,11 @@ releases:
   - name: linkerd-crds
     namespace: linkerd
     chart: linkerd/linkerd-crds
-    version: 1.4.0
+    version: 1.8.0
   - name: linkerd-control-plane
     namespace: linkerd
     chart: linkerd/linkerd-control-plane
-    version: 1.9.5
+    version: 1.16.5
     values:
       - values.yaml
     set:

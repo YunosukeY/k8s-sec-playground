@@ -9,7 +9,7 @@ generatorOptions:
 images:
   - name: backend
     newName: kimitsu/kind-backend
-    newTag: master@sha256:9cc21d969783bf94d1304696d245d4417635c60dbce09bdbb2574f26d020076f
+    newTag: master@sha256:2e99ed8ba00a4a60d4d3830164681137f65babb6f9baa0be91f199d370f9d557
 resources:
   - namespace.yaml
   - network-policy.yaml

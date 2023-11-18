@@ -10,9 +10,9 @@ jobs:
   golangci-lint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: aquaproj/aqua-installer@v2.0.2
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: aquaproj/aqua-installer@v2.2.0
         with:
-          aqua_version: v1.30.0
+          aqua_version: v2.18.0
       - run: |
           golangci-lint run --out-format=github-actions
