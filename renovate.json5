@@ -24,5 +24,15 @@
     },
   ],
 
+  regexManagers: [
+    {
+      fileMatch: ["\\.sh$"],
+      matchStrings: [
+        '#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sreadonly .*?_VERSION="(?<currentValue>.*)"\\s',
+      ],
+      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+    },
+  ],
+
   reviewers: ["YunosukeY"],
 }
