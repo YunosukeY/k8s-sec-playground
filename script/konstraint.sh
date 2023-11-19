@@ -2,22 +2,22 @@
 
 set -eu
 
-os="$(uname -s)"
-machine=$([[ $(uname -m) == arm64 ]] && echo arm64 || echo amd64)
-version="v0.31.0"
-repo_dir="$(git rev-parse --show-toplevel)"
-bin="${repo_dir}/bin"
-konstraint="${bin}/konstraint"
+readonly OS="$(uname -s)"
+readonly MACHINE=$([[ $(uname -m) == arm64 ]] && echo arm64 || echo amd64)
+readonly VERSION="v0.31.0"
+readonly REPO_DIR="$(git rev-parse --show-toplevel)"
+readonly BIN="${REPO_DIR}/bin"
+readonly KONSTRAINT="${BIN}/konstraint"
 
 
-if [[ -x "${konstraint}" ]]; then
+if [[ -x "${KONSTRAINT}" ]]; then
   true
 else
-  mkdir -p "${bin}"
-  echo "download konstraint ${version}"
-  url="https://github.com/plexsystems/konstraint/releases/download/${version}/konstraint-${os}-${machine}"
-  curl -sfSL "$url" > "${konstraint}"
-  chmod +x "${konstraint}"
+  mkdir -p "${BIN}"
+  echo "download konstraint ${VERSION}"
+  url="https://github.com/plexsystems/konstraint/releases/download/${VERSION}/konstraint-${OS}-${MACHINE}"
+  curl -sfSL "$url" > "${KONSTRAINT}"
+  chmod +x "${KONSTRAINT}"
 fi
 
-"${konstraint}" "${@}"
+"${KONSTRAINT}" "${@}"
