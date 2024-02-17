@@ -16,6 +16,7 @@ controller:
   admissionWebhooks:
     patch:
       securityContext:
+        runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
     createSecretJob:
