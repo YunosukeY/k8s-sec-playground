@@ -5,7 +5,7 @@ set -eu
 readonly OS="$(uname -s)"
 readonly MACHINE=$([[ $(uname -m) == arm64 ]] && echo arm64 || echo amd64)
 # renovate: datasource=github-releases depName=plexsystems/konstraint versioning=loose
-readonly KONSTRAINT_VERSION="v0.34.0"
+readonly KONSTRAINT_VERSION="v0.38.0"
 readonly REPO_DIR="$(git rev-parse --show-toplevel)"
 readonly BIN="${REPO_DIR}/bin"
 readonly KONSTRAINT="${BIN}/konstraint"
