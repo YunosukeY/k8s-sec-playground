@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - uses: aquaproj/aqua-installer@v2.3.0
+      - uses: aquaproj/aqua-installer@v2.3.2
         with:
           aqua_version: v2.23.1
       - run: |
