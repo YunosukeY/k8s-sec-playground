@@ -5,7 +5,7 @@ releases:
   - name: calico
     namespace: tigera-operator
     chart: projectcalico/tigera-operator
-    version: v3.27.2
+    version: v3.28.2
     disableValidationOnInstall: true
 environments:
   dev: {}
